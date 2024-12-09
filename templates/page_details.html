@@ -1,0 +1,68 @@
+<!-- templates/page_details.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ page_info.name }} - Full Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; }
+        section { border-bottom: 1px solid #ddd; padding: 20px 0; }
+        .post { background-color: #f4f4f4; margin: 10px 0; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>{{ page_info.name }} - Comprehensive Page Details</h1>
+    
+    <section>
+        <h2>Page Information</h2>
+        <p><strong>ID:</strong> {{ page_info.id }}</p>
+        <p><strong>Category:</strong> {{ page_info.category }}</p>
+        <p><strong>About:</strong> {{ page_info.about or 'Not provided' }}</p>
+        {% if page_info.website %}
+            <p><strong>Website:</strong> {{ page_info.website }}</p>
+        {% endif %}
+        {% if page_info.phone %}
+            <p><strong>Phone:</strong> {{ page_info.phone }}</p>
+        {% endif %}
+    </section>
+    
+    <section>
+        <h2>Page Posts</h2>
+        {% for post in posts %}
+        <div class="post">
+            {% if post.message %}
+                <p>{{ post.message }}</p>
+            {% endif %}
+            <p><strong>Created:</strong> {{ post.created_time }}</p>
+            {% if post.full_picture %}
+                <img src="{{ post.full_picture }}" style="max-width: 300px;">
+            {% endif %}
+            <p>
+                <strong>Likes:</strong> {{ post.likes.summary.total_count if post.likes else 0 }}
+                <strong>Comments:</strong> {{ post.comments.summary.total_count if post.comments else 0 }}
+            </p>
+        </div>
+        {% endfor %}
+    </section>
+    
+    <section>
+        <h2>Page Insights</h2>
+        {% for insight in insights %}
+            <p><strong>{{ insight.name }}:</strong> {{ insight.values[0].value }}</p>
+        {% endfor %}
+    </section>
+    
+    <section>
+        <h2>Recent Conversations</h2>
+        {% for conversation in conversations %}
+            <div class="conversation">
+                <p><strong>Participants:</strong> 
+                    {% for participant in conversation.participants.data %}
+                        {{ participant.name }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <p><strong>Updated:</strong> {{ conversation.updated_time }}</p>
+            </div>
+        {% endfor %}
+    </section>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Your Facebook Business Page</title>
+    <style>
+        .page-card {
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .page-card img {
+            margin-right: 15px;
+            max-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Your Business Page</h1>
+    {% for page in pages %}
+    <div class="page-card">
+        {% if page.picture and page.picture.data and page.picture.data.url %}
+            <img src="{{ page.picture.data.url }}" alt="{{ page.name }} Profile">
+        {% endif %}
+        <form action="/select_page" method="POST">
+            <input type="hidden" name="page_id" value="{{ page.id }}">
+            <h2>{{ page.name }}</h2>
+            <p>Category: {{ page.category }}</p>
+            <p>Available Tasks: {{ ', '.join(page.tasks) }}</p>
+            <button type="submit">Get Full Page Access</button>
+        </form>
+    </div>
+    {% endfor %}
+</body>
+</html>
