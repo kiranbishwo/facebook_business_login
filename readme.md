@@ -15,7 +15,7 @@ This project is a web application that integrates Facebook Business Login using 
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/yourusername/facebook_business_login.git
+    git clone https://github.com/kiranbishwo/facebook_business_login.git
     cd facebook_business_login
     ```
 

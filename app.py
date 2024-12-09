@@ -8,8 +8,8 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Secret key for session management
 
 # Facebook App Configuration
-FACEBOOK_APP_ID = '2022342391500325'
-FACEBOOK_APP_SECRET = '1ff3a04b459a31bd97462cf829821d46'
+FACEBOOK_APP_ID = 'your_app_id'
+FACEBOOK_APP_SECRET = 'your_app_secret'
 REDIRECT_URI = 'http://localhost:5000/facebook-callback'
 GRAPH_API_VERSION = 'v19.0'
 
